@@ -94,39 +94,23 @@ docker compose up -d --build
   afresh.
 - Generate a key with `docker run --rm kinetra-admin-demo php artisan key:generate --show`.
 
-### Automated CI/CD (GitHub Actions + GHCR)
+### Automated CI/CD (GitHub Actions + GHCR + Tailscale SSH)
 
-- `.github/workflows/tests.yml` runs on every pull request and push to `main`: builds the demo template and frontend assets, then runs `composer ci:check` (Vite+ lint/format, TypeScript, Pint, PHPStan, and Pest).
-- `.github/workflows/deploy.yml` runs on pushes to `main` (and manual dispatch): waits for CI, builds and pushes the Docker image to `ghcr.io`, and deploys via SSH to your VPS when secrets are configured.
+- `.github/workflows/tests.yml` runs on pull requests and via `deploy.yml`: builds the demo template and frontend assets, then runs `composer ci:check` (Vite+ lint/format, TypeScript, Pint, PHPStan, and Pest).
+- `.github/workflows/deploy.yml` runs on pushes to `main` (and manual dispatch): waits for CI, builds and pushes the Docker image to `ghcr.io`, and — when repository variable `DEPLOY_ENABLED` is `true` — joins your tailnet as `tag:ci` and deploys over Tailscale SSH (`docker compose pull && up -d`).
 
-Configure these repository or `production` environment secrets in GitHub:
+Configure these repository secrets and variables in GitHub:
 
-| Secret                | Required                   | Description                                                                 |
-| --------------------- | -------------------------- | --------------------------------------------------------------------------- |
-| `VPS_HOST`            | Yes (for SSH deploy)       | VPS hostname or IP address                                                  |
-| `VPS_USER`            | Yes (for SSH deploy)       | SSH user with Docker permissions                                            |
-| `VPS_SSH_KEY`         | Yes (for SSH deploy)       | Private SSH key for the deploy user                                         |
-| `VPS_PORT`            | No                         | SSH port (defaults to `22`)                                                 |
-| `VPS_APP_DIR`         | No                         | App directory on VPS containing `.env` (defaults to `~/kinetra-admin-demo`) |
-| `VPS_SSH_KNOWN_HOSTS` | No                         | Output of `ssh-keyscan -H <host>` for strict host-key checking              |
-| `GHCR_TOKEN`          | Only if package is private | PAT with `read:packages` so the VPS can pull from GHCR                      |
-
-### Automated CI/CD (GitHub Actions + GHCR)
-
-- `.github/workflows/tests.yml` runs on every pull request and push to `main`: builds the demo template and frontend assets, then runs `composer ci:check` (Vite+ lint/format, TypeScript, Pint, PHPStan, and Pest).
-- `.github/workflows/deploy.yml` runs on pushes to `main` (and manual dispatch): waits for CI, builds and pushes the Docker image to `ghcr.io`, and deploys via SSH to your VPS when secrets are configured.
-
-Configure these repository or `production` environment secrets in GitHub:
-
-| Secret | Required | Description |
-| --- | --- | --- |
-| `VPS_HOST` | Yes (for SSH deploy) | VPS hostname or IP address |
-| `VPS_USER` | Yes (for SSH deploy) | SSH user with Docker permissions |
-| `VPS_SSH_KEY` | Yes (for SSH deploy) | Private SSH key for the deploy user |
-| `VPS_PORT` | No | SSH port (defaults to `22`) |
-| `VPS_APP_DIR` | No | App directory on VPS containing `.env` (defaults to `~/kinetra-admin-demo`) |
-| `VPS_SSH_KNOWN_HOSTS` | No | Output of `ssh-keyscan -H <host>` for strict host-key checking |
-| `GHCR_TOKEN` | Only if package is private | PAT with `read:packages` so the VPS can pull from GHCR |
+| Name                 | Kind     | Required                   | Description                                                                 |
+| -------------------- | -------- | -------------------------- | --------------------------------------------------------------------------- |
+| `TS_OAUTH_CLIENT_ID` | Secret   | Yes                        | Tailscale OAuth client ID permitted to issue `tag:ci`                       |
+| `TS_OAUTH_SECRET`    | Secret   | Yes                        | Tailscale OAuth client secret                                               |
+| `VPS_HOST`           | Secret   | Yes                        | VPS Tailscale IP or MagicDNS hostname                                       |
+| `VPS_USER`           | Secret   | Yes                        | SSH user on the VPS with Docker permissions                                 |
+| `VPS_KNOWN_HOSTS`    | Secret   | Yes                        | Output of `ssh-keyscan` for the VPS host key                                |
+| `GHCR_TOKEN`         | Secret   | Only if package is private | PAT with `read:packages` so the VPS can pull from GHCR                      |
+| `DEPLOY_ENABLED`     | Variable | To enable CD               | Set to `true` to turn on automatic VPS deploys                              |
+| `VPS_APP_DIR`        | Variable | No                         | App directory on VPS containing `.env` (defaults to `~/kinetra-admin-demo`) |
 
 ## Code map
 

@@ -69,8 +69,10 @@ jobs:
           SHA_TAG="$(printf '%s\n' "$META_TAGS" | grep ':sha-' | head -n 1)"
           echo "ref=${SHA_TAG}" >> "$GITHUB_OUTPUT"
 
+  # Stays off until the repository variable DEPLOY_ENABLED is set to "true".
   deploy:
     needs: build
+    if: vars.DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     environment: production
 
@@ -80,42 +82,38 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Deploy to VPS over SSH
+      # SSH on the VPS is only reachable over Tailscale. Join the tailnet as a
+      # short-lived node tagged tag:ci, removed automatically when the job ends.
+      - name: Join the tailnet
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      # The VPS runs Tailscale SSH, letting this runner in as VPS_USER via its
+      # tailnet identity (tag:ci), so no SSH key is needed. known_hosts pins
+      # the VPS host key.
+      - name: Set up SSH
+        env:
+          KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy via Docker Compose
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_PORT }}
-          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
-          VPS_SSH_KNOWN_HOSTS: ${{ secrets.VPS_SSH_KNOWN_HOSTS }}
-          VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+          VPS_APP_DIR: ${{ vars.VPS_APP_DIR }}
           GHCR_USER: ${{ github.actor }}
           GHCR_TOKEN: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
           APP_IMAGE: ${{ needs.build.outputs.image }}
         run: |
-          if [ -z "$VPS_HOST" ] || [ -z "$VPS_USER" ] || [ -z "$VPS_SSH_KEY" ]; then
-            echo "::notice::VPS_HOST, VPS_USER, or VPS_SSH_KEY secret is not configured — skipping VPS deploy. Image ${APP_IMAGE} was pushed to GHCR."
-            exit 0
-          fi
-
-          PORT="${VPS_PORT:-22}"
           RAW_APP_DIR="${VPS_APP_DIR:-kinetra-admin-demo}"
 
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-
-          if [ -n "$VPS_SSH_KNOWN_HOSTS" ]; then
-            printf '%s\n' "$VPS_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-            chmod 644 ~/.ssh/known_hosts
-            HOST_KEY_OPT="yes"
-          else
-            HOST_KEY_OPT="accept-new"
-          fi
-
-          SSH_OPTS="-i ~/.ssh/deploy_key -p ${PORT} -o StrictHostKeyChecking=${HOST_KEY_OPT}"
-
-          # Resolve ~ or relative path on the remote host and ensure directory exists.
-          REMOTE_DIR="$(ssh $SSH_OPTS "${VPS_USER}@${VPS_HOST}" bash -s -- "$RAW_APP_DIR" <<'EOF'
+          REMOTE_DIR="$(ssh -o BatchMode=yes "${VPS_USER}@${VPS_HOST}" bash -s -- "$RAW_APP_DIR" <<'EOF'
           set -euo pipefail
           DIR="${1/#\~/$HOME}"
           case "$DIR" in
@@ -127,14 +125,14 @@ jobs:
           EOF
           )"
 
-          scp -i ~/.ssh/deploy_key -P "${PORT}" -o "StrictHostKeyChecking=${HOST_KEY_OPT}" \
-            docker-compose.yml "${VPS_USER}@${VPS_HOST}:${REMOTE_DIR}/docker-compose.yml"
+          # Sync docker-compose.yml over Tailscale SSH.
+          ssh -o BatchMode=yes "${VPS_USER}@${VPS_HOST}" "cat > '${REMOTE_DIR}/docker-compose.yml'" < docker-compose.yml
 
           # Log into GHCR, pin APP_IMAGE in .env, pull, and restart containers.
-          printf '%s\n' "$GHCR_TOKEN" | ssh $SSH_OPTS "${VPS_USER}@${VPS_HOST}" \
+          printf '%s\n' "$GHCR_TOKEN" | ssh -o BatchMode=yes "${VPS_USER}@${VPS_HOST}" \
             "docker login ghcr.io -u '${GHCR_USER}' --password-stdin"
 
-          ssh $SSH_OPTS "${VPS_USER}@${VPS_HOST}" bash -s -- "$REMOTE_DIR" "$APP_IMAGE" <<'EOF'
+          ssh -o BatchMode=yes "${VPS_USER}@${VPS_HOST}" bash -s -- "$REMOTE_DIR" "$APP_IMAGE" <<'EOF'
           set -euo pipefail
           APP_DIR="$1"
           APP_IMAGE="$2"
