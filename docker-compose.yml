@@ -1,0 +1,69 @@
+# Production on a small VPS (2 GB is plenty):
+#
+#   cp .env.docker.example .env   # set APP_KEY, APP_URL, SERVER_NAME
+#   docker compose up -d --build
+#
+# Sandboxes live on a shared tmpfs volume: they are throwaway by design, so a
+# restart or deploy simply starts every visitor afresh.
+#
+# Both containers run read-only, without capabilities, and can't gain
+# privileges; the few paths Laravel writes to are tmpfs.
+
+x-hardening: &hardening
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    tmpfs:
+        - /tmp:uid=1000,gid=1000,mode=0700
+        - /app/storage/framework:uid=1000,gid=1000,mode=0750
+        - /app/storage/logs:uid=1000,gid=1000,mode=0750
+        - /app/bootstrap/cache:uid=1000,gid=1000,mode=0750
+
+services:
+    app:
+        <<: *hardening
+        build: .
+        image: ${APP_IMAGE:-kinetra-admin-demo}
+        restart: unless-stopped
+        env_file: .env
+        ports:
+            - '${HTTP_BIND:-8081}:80'
+            - '${HTTPS_BIND:-8443}:443'
+            - '${HTTPS_BIND:-8443}:443/udp'
+        # Lets the non-root user bind 80 and 443 without file capabilities.
+        sysctls:
+            net.ipv4.ip_unprivileged_port_start: 0
+        volumes:
+            - demo-runtime:/app/storage/demo
+            - caddy-data:/data
+            - caddy-config:/config
+        # The sandbox tmpfs (up to 512 MB, see config/demo.php) is charged to
+        # this container's memory, on top of PHP itself.
+        mem_limit: 1g
+        cpus: 1.0
+        pids_limit: 256
+
+    scheduler:
+        <<: *hardening
+        image: ${APP_IMAGE:-kinetra-admin-demo}
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            SKIP_TEMPLATE_BUILD: '1'
+        command: ['php', 'artisan', 'schedule:work']
+        volumes:
+            - demo-runtime:/app/storage/demo
+        depends_on:
+            - app
+        mem_limit: 256m
+        pids_limit: 64
+
+volumes:
+    demo-runtime:
+        driver: local
+        driver_opts:
+            type: tmpfs
+            device: tmpfs
+            o: 'size=512m,uid=1000,gid=1000,mode=0750'
+    caddy-data:
+    caddy-config:

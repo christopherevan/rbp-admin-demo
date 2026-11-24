@@ -1,0 +1,158 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/tests.yml
+
+  build:
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.image.outputs.ref }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha,prefix=sha-
+            type=raw,value=latest
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Export pushed image reference
+        id: image
+        env:
+          META_TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          SHA_TAG="$(printf '%s\n' "$META_TAGS" | grep ':sha-' | head -n 1)"
+          echo "ref=${SHA_TAG}" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout compose file
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Deploy to VPS over SSH
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_SSH_KNOWN_HOSTS: ${{ secrets.VPS_SSH_KNOWN_HOSTS }}
+          VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
+          APP_IMAGE: ${{ needs.build.outputs.image }}
+        run: |
+          if [ -z "$VPS_HOST" ] || [ -z "$VPS_USER" ] || [ -z "$VPS_SSH_KEY" ]; then
+            echo "::notice::VPS_HOST, VPS_USER, or VPS_SSH_KEY secret is not configured — skipping VPS deploy. Image ${APP_IMAGE} was pushed to GHCR."
+            exit 0
+          fi
+
+          PORT="${VPS_PORT:-22}"
+          RAW_APP_DIR="${VPS_APP_DIR:-kinetra-admin-demo}"
+
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          if [ -n "$VPS_SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$VPS_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+            chmod 644 ~/.ssh/known_hosts
+            HOST_KEY_OPT="yes"
+          else
+            HOST_KEY_OPT="accept-new"
+          fi
+
+          SSH_OPTS="-i ~/.ssh/deploy_key -p ${PORT} -o StrictHostKeyChecking=${HOST_KEY_OPT}"
+
+          # Resolve ~ or relative path on the remote host and ensure directory exists.
+          REMOTE_DIR="$(ssh $SSH_OPTS "${VPS_USER}@${VPS_HOST}" bash -s -- "$RAW_APP_DIR" <<'EOF'
+          set -euo pipefail
+          DIR="${1/#\~/$HOME}"
+          case "$DIR" in
+            /*) ;;
+            *) DIR="$HOME/$DIR" ;;
+          esac
+          mkdir -p "$DIR"
+          printf '%s\n' "$DIR"
+          EOF
+          )"
+
+          scp -i ~/.ssh/deploy_key -P "${PORT}" -o "StrictHostKeyChecking=${HOST_KEY_OPT}" \
+            docker-compose.yml "${VPS_USER}@${VPS_HOST}:${REMOTE_DIR}/docker-compose.yml"
+
+          # Log into GHCR, pin APP_IMAGE in .env, pull, and restart containers.
+          printf '%s\n' "$GHCR_TOKEN" | ssh $SSH_OPTS "${VPS_USER}@${VPS_HOST}" \
+            "docker login ghcr.io -u '${GHCR_USER}' --password-stdin"
+
+          ssh $SSH_OPTS "${VPS_USER}@${VPS_HOST}" bash -s -- "$REMOTE_DIR" "$APP_IMAGE" <<'EOF'
+          set -euo pipefail
+          APP_DIR="$1"
+          APP_IMAGE="$2"
+          cd "$APP_DIR"
+
+          if [ ! -f .env ]; then
+            echo "Missing ${APP_DIR}/.env on the VPS. Copy .env.docker.example to .env and set APP_KEY, APP_URL, and SERVER_NAME first." >&2
+            exit 1
+          fi
+
+          if grep -q '^APP_IMAGE=' .env; then
+            sed -i "s|^APP_IMAGE=.*|APP_IMAGE=${APP_IMAGE}|" .env
+          else
+            printf '\nAPP_IMAGE=%s\n' "$APP_IMAGE" >> .env
+          fi
+
+          docker compose pull
+          docker compose up -d --no-build --remove-orphans
+          docker image prune -f
+          docker compose ps
+          EOF

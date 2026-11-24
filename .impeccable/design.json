@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T07:13:00Z",
+  "title": "Design System: Kinetra Admin",
+  "extensions": {
+    "colorMeta": {
+      "cobalt-primary": {
+        "role": "primary",
+        "displayName": "Industrial Cobalt",
+        "canonical": "oklch(0.598 0.166 255.5)",
+        "tonalRamp": [
+          "oklch(0.22 0.08 255.5)",
+          "oklch(0.32 0.11 255.5)",
+          "oklch(0.45 0.15 255.5)",
+          "oklch(0.598 0.166 255.5)",
+          "oklch(0.674 0.176 254.6)",
+          "oklch(0.78 0.11 255.5)",
+          "oklch(0.89 0.05 255.5)",
+          "oklch(0.96 0.018 255.5)"
+        ]
+      },
+      "cobalt-primary-dark": {
+        "role": "primary",
+        "displayName": "Luminous Cobalt",
+        "canonical": "oklch(0.674 0.176 254.6)",
+        "tonalRamp": [
+          "oklch(0.22 0.08 254.6)",
+          "oklch(0.35 0.12 254.6)",
+          "oklch(0.50 0.16 254.6)",
+          "oklch(0.598 0.166 255.5)",
+          "oklch(0.674 0.176 254.6)",
+          "oklch(0.78 0.12 254.6)",
+          "oklch(0.89 0.05 254.6)",
+          "oklch(0.96 0.02 254.6)"
+        ]
+      },
+      "destructive-red": {
+        "role": "secondary",
+        "displayName": "Signal Crimson",
+        "canonical": "oklch(0.577 0.245 27.325)",
+        "tonalRamp": [
+          "oklch(0.24 0.10 27.325)",
+          "oklch(0.396 0.141 25.723)",
+          "oklch(0.49 0.20 27.325)",
+          "oklch(0.577 0.245 27.325)",
+          "oklch(0.637 0.237 25.331)",
+          "oklch(0.76 0.14 27.325)",
+          "oklch(0.89 0.06 27.325)",
+          "oklch(0.96 0.02 27.325)"
+        ]
+      },
+      "canvas-white": {
+        "role": "neutral",
+        "displayName": "Canvas White",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": [
+          "oklch(0.145 0 0)",
+          "oklch(0.205 0 0)",
+          "oklch(0.269 0 0)",
+          "oklch(0.556 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.922 0 0)",
+          "oklch(0.97 0 0)",
+          "oklch(1 0 0)"
+        ]
+      },
+      "sidebar-paper": {
+        "role": "neutral",
+        "displayName": "Sidebar Paper",
+        "canonical": "oklch(0.985 0 0)",
+        "tonalRamp": [
+          "oklch(0.145 0 0)",
+          "oklch(0.205 0 0)",
+          "oklch(0.269 0 0)",
+          "oklch(0.556 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.922 0 0)",
+          "oklch(0.97 0 0)",
+          "oklch(0.985 0 0)"
+        ]
+      },
+      "surface-muted": {
+        "role": "neutral",
+        "displayName": "Surface Muted",
+        "canonical": "oklch(0.97 0 0)",
+        "tonalRamp": [
+          "oklch(0.145 0 0)",
+          "oklch(0.205 0 0)",
+          "oklch(0.269 0 0)",
+          "oklch(0.556 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.922 0 0)",
+          "oklch(0.97 0 0)",
+          "oklch(0.985 0 0)"
+        ]
+      },
+      "hairline-border": {
+        "role": "neutral",
+        "displayName": "Hairline Border",
+        "canonical": "oklch(0.922 0 0)",
+        "tonalRamp": [
+          "oklch(0.145 0 0)",
+          "oklch(0.269 0 0)",
+          "oklch(0.439 0 0)",
+          "oklch(0.556 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.87 0 0)",
+          "oklch(0.922 0 0)",
+          "oklch(0.97 0 0)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate Ink",
+        "canonical": "oklch(0.556 0 0)",
+        "tonalRamp": [
+          "oklch(0.145 0 0)",
+          "oklch(0.205 0 0)",
+          "oklch(0.35 0 0)",
+          "oklch(0.556 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.922 0 0)",
+          "oklch(0.97 0 0)"
+        ]
+      },
+      "ink-primary": {
+        "role": "neutral",
+        "displayName": "Deep Carbon Ink",
+        "canonical": "oklch(0.145 0 0)",
+        "tonalRamp": [
+          "oklch(0.145 0 0)",
+          "oklch(0.205 0 0)",
+          "oklch(0.269 0 0)",
+          "oklch(0.439 0 0)",
+          "oklch(0.556 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.922 0 0)",
+          "oklch(0.985 0 0)"
+        ]
+      },
+      "dark-canvas": {
+        "role": "neutral",
+        "displayName": "Dark Canvas",
+        "canonical": "oklch(0.145 0 0)",
+        "tonalRamp": [
+          "oklch(0.10 0 0)",
+          "oklch(0.145 0 0)",
+          "oklch(0.205 0 0)",
+          "oklch(0.269 0 0)",
+          "oklch(0.439 0 0)",
+          "oklch(0.708 0 0)",
+          "oklch(0.87 0 0)",
+          "oklch(0.985 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Public landing hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Admin PageHeader titles and primary screen headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles, workspace sub-sections, and modal headers."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Operational UI copy, table rows, forms, and descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase table headers, status badges, and metadata kickers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "control-whisper",
+        "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "purpose": "Subtle edge definition on buttons and text inputs."
+      },
+      {
+        "name": "card-resting",
+        "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+        "purpose": "Flat-by-default resting separation on cards and active tabs."
+      },
+      {
+        "name": "interactive-lift",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        "purpose": "Hover-only lift on linked StatCard tiles and floating chart tooltips."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transition-control",
+        "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Color, border, and focus-ring transitions on buttons, inputs, and table rows."
+      },
+      {
+        "name": "hover-lift",
+        "value": "transform 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Subtle -2px hover lift on navigable pipeline stat cards."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary workflow CTA such as New quotation or Advance step.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\"/><path d=\"M14 2v4a2 2 0 0 0 2 2h4\"/><path d=\"M9 15h6\"/><path d=\"M12 18v-6\"/></svg>New quotation</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 8px 16px; border: 0; border-radius: var(--radius-md, 8px); background: var(--primary, oklch(0.598 0.166 255.5)); color: var(--primary-foreground, oklch(0.985 0 0)); font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); font-size: 14px; font-weight: 500; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); cursor: pointer; transition: background 150ms ease, box-shadow 150ms ease; } .ds-btn-primary:hover { background: color-mix(in oklab, var(--primary, oklch(0.598 0.166 255.5)) 90%, transparent); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ring, oklch(0.598 0.166 255.5 / 0.5)); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action button such as New customer, Switch role, or Print.",
+      "html": "<button type=\"button\" class=\"ds-btn-outline\">New customer</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 8px 16px; border: 1px solid var(--input, oklch(0.922 0 0)); border-radius: var(--radius-md, 8px); background: var(--background, oklch(1 0 0)); color: var(--foreground, oklch(0.145 0 0)); font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); font-size: 14px; font-weight: 500; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); cursor: pointer; transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease; } .ds-btn-outline:hover { background: var(--accent, oklch(0.97 0 0)); color: var(--accent-foreground, oklch(0.205 0 0)); } .ds-btn-outline:focus-visible { outline: none; border-color: var(--ring, oklch(0.598 0.166 255.5 / 0.5)); box-shadow: 0 0 0 3px var(--ring, oklch(0.598 0.166 255.5 / 0.5)); }"
+    },
+    {
+      "name": "Destructive Button",
+      "kind": "button",
+      "refersTo": "button-destructive",
+      "description": "Irreversible workflow actions such as cancelling a quotation or deleting a draft.",
+      "html": "<button type=\"button\" class=\"ds-btn-destructive\">Cancel quotation</button>",
+      "css": ".ds-btn-destructive { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 8px 16px; border: 0; border-radius: var(--radius-md, 8px); background: var(--destructive, oklch(0.577 0.245 27.325)); color: #ffffff; font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); font-size: 14px; font-weight: 500; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); cursor: pointer; transition: background 150ms ease, box-shadow 150ms ease; } .ds-btn-destructive:hover { background: color-mix(in oklab, var(--destructive, oklch(0.577 0.245 27.325)) 90%, transparent); } .ds-btn-destructive:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive, oklch(0.577 0.245 27.325)) 25%, transparent); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Hairline-bordered field for forms, part search, and customer details.",
+      "html": "<input type=\"text\" class=\"ds-input\" placeholder=\"Search quotation number or customer…\" />",
+      "css": ".ds-input { display: flex; width: 100%; height: 36px; padding: 4px 12px; border: 1px solid var(--input, oklch(0.922 0 0)); border-radius: var(--radius-md, 8px); background: var(--background, oklch(1 0 0)); color: var(--foreground, oklch(0.145 0 0)); font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); font-size: 14px; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); outline: none; transition: border-color 150ms ease, box-shadow 150ms ease; } .ds-input::placeholder { color: var(--muted-foreground, oklch(0.556 0 0)); } .ds-input:focus-visible { border-color: var(--ring, oklch(0.598 0.166 255.5 / 0.5)); box-shadow: 0 0 0 3px var(--ring, oklch(0.598 0.166 255.5 / 0.5)); }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "description": "Preserved production workflow status pill with 1px inset ring and uppercase label.",
+      "html": "<div class=\"ds-badge-row\"><span class=\"ds-status ds-status-amber\">On progress</span><span class=\"ds-status ds-status-violet\">Waiting payment</span><span class=\"ds-status ds-status-emerald\">Completed</span></div>",
+      "css": ".ds-badge-row { display: flex; flex-wrap: wrap; gap: 8px; } .ds-status { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: var(--radius-md, 8px); font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; } .ds-status-amber { background: #fffbeb; color: #92400e; box-shadow: inset 0 0 0 1px rgb(217 119 6 / 0.2); } .ds-status-violet { background: #f5f3ff; color: #6d28d9; box-shadow: inset 0 0 0 1px rgb(124 58 237 / 0.2); } .ds-status-emerald { background: #ecfdf5; color: #047857; box-shadow: inset 0 0 0 1px rgb(5 150 105 / 0.2); }"
+    },
+    {
+      "name": "Pipeline Stat Card",
+      "kind": "card",
+      "refersTo": "stat-card",
+      "description": "Linked KPI tile pairing a workflow StatusBadge with a tabular pipeline count.",
+      "html": "<a href=\"#\" class=\"ds-stat-card\"><span class=\"ds-stat-badge\">On progress</span><span class=\"ds-stat-value\">14</span></a>",
+      "css": ".ds-stat-card { display: flex; flex-direction: column; gap: 8px; padding: 16px; border: 1px solid var(--border, oklch(0.922 0 0)); border-radius: 12px; background: var(--card, oklch(1 0 0)); color: var(--card-foreground, oklch(0.145 0 0)); text-decoration: none; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); transition: transform 150ms ease, box-shadow 150ms ease; } .ds-stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); } .ds-stat-card:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--ring, oklch(0.598 0.166 255.5 / 0.5)); } .ds-stat-badge { width: fit-content; padding: 2px 8px; border-radius: 6px; background: #fffbeb; color: #92400e; box-shadow: inset 0 0 0 1px rgb(217 119 6 / 0.2); font-size: 12px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; } .ds-stat-value { font-size: 30px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Brand Sidebar Header",
+      "kind": "nav",
+      "description": "Kinetra Admin conveyor-belt mark and application title inside the inset sidebar.",
+      "html": "<a href=\"#\" class=\"ds-brand\"><span class=\"ds-brand-mark\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 32 32\" fill=\"none\"><rect x=\"4\" y=\"11\" width=\"24\" height=\"10\" rx=\"5\" stroke=\"currentColor\" stroke-width=\"2.5\"/><circle cx=\"9\" cy=\"16\" r=\"2\" fill=\"currentColor\"/><circle cx=\"23\" cy=\"16\" r=\"2\" fill=\"currentColor\"/><rect x=\"12\" y=\"5\" width=\"8\" height=\"5\" rx=\"1\" fill=\"currentColor\"/></svg></span><span class=\"ds-brand-copy\"><span class=\"ds-brand-title\">Kinetra Admin</span><span class=\"ds-brand-sub\">Portfolio demo</span></span></a>",
+      "css": ".ds-brand { display: inline-flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: var(--radius-md, 8px); background: var(--sidebar, oklch(0.985 0 0)); color: var(--sidebar-foreground, oklch(0.145 0 0)); text-decoration: none; font-family: var(--font-sans, 'Instrument Sans', system-ui, sans-serif); transition: background 150ms ease; } .ds-brand:hover { background: var(--sidebar-accent, oklch(0.97 0 0)); } .ds-brand:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--ring, oklch(0.598 0.166 255.5 / 0.5)); } .ds-brand-mark { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: var(--primary, oklch(0.598 0.166 255.5)); color: var(--primary-foreground, oklch(0.985 0 0)); } .ds-brand-copy { display: flex; flex-direction: column; line-height: 1.2; } .ds-brand-title { font-size: 14px; font-weight: 600; } .ds-brand-sub { font-size: 12px; color: var(--muted-foreground, oklch(0.556 0 0)); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Precision Dispatch Desk",
+    "overview": "Kinetra Admin is built like a well-kept industrial sales counter where every quotation, purchase order, stock level, and invoice reads clearly without visual noise. Surfaces stay neutral and flat by default so numbers, part codes, and workflow statuses carry the hierarchy.\n\nA single industrial cobalt primary anchors actions, active navigation, and price trends against white and deep charcoal canvases. Semantic color stays strictly functional—reserved for preserved production status badges, validation states, and chart series.",
+    "keyCharacteristics": [
+      "High-contrast light and dark OKLCH canvases (`resources/css/app.css`).",
+      "Hairline 1px borders and tonal surfaces instead of heavy drop shadows.",
+      "`Instrument Sans` with system monospace part/document codes and tabular numerals.",
+      "Preserved production status palette (`resources/js/lib/status.ts`) with inset rings and text labels.",
+      "Cohesive transition across dense admin screens, public portfolio pages, and A4 print sheets."
+    ],
+    "rules": [
+      {
+        "name": "The One Cobalt Voice Rule",
+        "body": "Industrial Cobalt is reserved for primary actions, active selections, links, and the brand mark. Never wash full sections in decorative gradients or competing accents.",
+        "section": "colors"
+      },
+      {
+        "name": "The Semantic Status Rule",
+        "body": "Status badges in `resources/js/lib/status.ts` (red, amber, slate, violet, emerald, sky, zinc) carry fixed production meanings and always pair color with an uppercase label and 1px inset ring; never invent ad-hoc status colors.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Figures Rule",
+        "body": "Every currency amount (IDR), stock count, quantity, KPI value, and pagination counter uses tabular numerals so columns align vertically.",
+        "section": "typography"
+      },
+      {
+        "name": "The Three-Weight Ceiling Rule",
+        "body": "Stay within weights 400, 500, and 600 of `Instrument Sans` across screen UI (700 appears only on A4 print headers).",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Non-interactive panels, tables, and nested rows never cast elevated shadows; elevation increases only on hoverable cards or transient overlays.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use semantic CSS custom properties from `resources/css/app.css` so light and dark modes stay synchronized.",
+      "Do apply tabular numerals to all rupiah figures, quantities, KPI counts, and pagination indicators.",
+      "Do route all workflow statuses through `resources/js/components/status-badge.tsx` and `resources/js/lib/status.ts`.",
+      "Do preserve keyboard accessibility, visible focus rings, and reduced-motion safety on interactive controls.",
+      "Do keep 1px borders and flat surfaces as the primary grouping mechanism across admin screens."
+    ],
+    "donts": [
+      "Don't introduce decorative gradients, neon dark-mode glows, or competing brand accents alongside Industrial Cobalt.",
+      "Don't nest shadowed cards inside cards; use hairline dividers or subtle muted bands instead.",
+      "Don't hard-code hex colors in React components outside the A4 print sheet (`resources/js/pages/print/document.tsx`).",
+      "Don't omit dark-mode pairings when using semantic status or icon-well tints.",
+      "Don't fabricate real company claims, customer logos, or unverified metrics."
+    ]
+  }
+}

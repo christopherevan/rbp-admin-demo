@@ -1,0 +1,511 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#1 \$string of function str expects string\|null, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Admin/CatalogDescriptionController.php
+
+		-
+			message: '#^Property App\\Models\\CatalogProduct\:\:\$decided_by \(int\<0, max\>\|null\) does not accept int\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Admin/CatalogDescriptionController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\QuotationLine\:\:\$quotation_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\QuotationLine\:\:\$quotation_ulid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\QuotationLine\:\:\$quoted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<int, App\\Models\\Customer\>\:\:through\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\QuotationLine\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\QuotationLine\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: app/Http/Controllers/Admin/CustomerController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\QuotationLine\:\:\$date\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/DashboardController.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\ActivityLog\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Controllers/Admin/DashboardController.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,App\\Models\\ActivityLog\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Controllers/Admin/DashboardController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<int, App\\Models\\Inquiry\>\:\:through\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/InquiryController.php
+
+		-
+			message: '#^Parameter \#2 \$assignee of method App\\Services\\InquiryWorkflow\:\:assign\(\) expects App\\Models\\User, App\\Models\\User\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\User\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Admin/InquiryController.php
+
+		-
+			message: '#^Parameter \#2 \$customer of method App\\Services\\InquiryWorkflow\:\:linkCustomer\(\) expects App\\Models\\Customer, App\\Models\\Customer\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Customer\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Admin/InquiryController.php
+
+		-
+			message: '#^Parameter \#3 \$contact of method App\\Services\\InquiryWorkflow\:\:linkCustomer\(\) expects App\\Models\\Contact\|null, App\\Models\\Contact\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Contact\>\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Admin/InquiryController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<int, App\\Models\\Part\>\:\:through\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/PartController.php
+
+		-
+			message: '#^Parameter \#1 \$boolean of function abort_unless expects bool, App\\Models\\DeliveryOrder\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Admin/QuotationActionController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/Admin/QuotationActionController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/Admin/QuotationActionController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Quotation\:\:\$lines_sum_line_total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/QuotationController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<int, App\\Models\\Quotation\>\:\:through\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Admin/QuotationController.php
+
+		-
+			message: '#^Parameter \#2 \$lines of method App\\Services\\QuotationWorkflow\:\:saveLines\(\) expects list\<array\{part_id\: int, quantity\: int, unit_price\: int\}\>, array\<array\{part_id\: int, quantity\: int, unit_price\: int\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Admin/QuotationLineController.php
+
+		-
+			message: '#^Parameter \#2 \$items of method App\\Services\\InquiryWorkflow\:\:submit\(\) expects list\<array\{part_id\: int\|null, title\: string, part_number\: string\|null, quantity\: int, unit\: string\|null, note\: string\|null\}\>, array\<array\{part_id\: int\<0, max\>\|null, title\: mixed, part_number\: string\|null, quantity\: mixed, unit\: string\|null, note\: mixed\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/QuoteRequestController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/QuoteRequestController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/QuoteRequestController.php
+
+		-
+			message: '#^Cannot cast array\|string\|null to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: app/Http/Middleware/DemoSandbox.php
+
+		-
+			message: '#^Parameter \#2 \$lines of method App\\Services\\QuotationWorkflow\:\:saveLines\(\) expects list\<array\{part_id\: int, quantity\: int, unit_price\: int\}\>, non\-empty\-array\<int, array\{part_id\: int\|null, quantity\: int, unit_price\: int\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/InquiryWorkflow.php
+
+		-
+			message: '#^Property App\\Models\\Inquiry\:\:\$decided_by \(int\<0, max\>\|null\) does not accept int\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: app/Services/InquiryWorkflow.php
+
+		-
+			message: '#^Property App\\Models\\Inquiry\:\:\$quotation_id \(int\<0, max\>\|null\) does not accept int\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/InquiryWorkflow.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Customer\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Customer\>\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/QuotationWorkflow.php
+
+		-
+			message: '#^Method App\\Services\\QuotationWorkflow\:\:nextActions\(\) should return list\<array\{key\: string, label\: string, primary\: bool, allowed\: bool, reason\: string\|null, invoice_id\?\: int\}\> but returns list\<non\-empty\-array\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/QuotationWorkflow.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<array\{part_id\: int, quantity\: int, unit_price\: int\}\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: app/Services/QuotationWorkflow.php
+
+		-
+			message: '#^Parameter \#1 \$customer of static method App\\Support\\DocumentNumber\:\:quotation\(\) expects App\\Models\\Customer, App\\Models\\Customer\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Customer\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/QuotationWorkflow.php
+
+		-
+			message: '#^Property App\\Models\\Quotation\:\:\$customer_po_at \(Illuminate\\Support\\Carbon\|null\) does not accept Carbon\\CarbonImmutable\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Services/QuotationWorkflow.php
+
+		-
+			message: '#^Parameter \$name of function cookie expects non\-empty\-string\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Support/Sandbox/SandboxManager.php
+
+		-
+			message: '#^Parameter \#2 \$direction of method Illuminate\\Database\\Eloquent\\Builder\<TModel of Illuminate\\Database\\Eloquent\\Model\>\:\:orderBy\(\) expects ''asc''\|''desc''\|SortDirection, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Support/TableQuery.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: bootstrap/app.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, string\|true given\.$#'
+			identifier: argument.type
+			count: 1
+			path: bootstrap/app.php
+
+		-
+			message: '#^Method Database\\Seeders\\Demo\\CatalogData\:\:all\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/Demo/CatalogData.php
+
+		-
+			message: '#^Method Database\\Seeders\\Demo\\InquiryData\:\:all\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/Demo/InquiryData.php
+
+		-
+			message: '#^ArrayObject\<\*NEVER\*, \*NEVER\*\> does not accept App\\Models\\Inquiry\.$#'
+			identifier: offsetAssign.valueType
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^ArrayObject\<\*NEVER\*, \*NEVER\*\> does not accept App\\Models\\Invoice\.$#'
+			identifier: offsetAssign.valueType
+			count: 2
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^ArrayObject\<\*NEVER\*, \*NEVER\*\> does not accept App\\Models\\Quotation\.$#'
+			identifier: offsetAssign.valueType
+			count: 2
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot assign offset ''dp'' to ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAssign.dimType
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot assign offset ''inquiry'' to ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAssign.dimType
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot assign offset ''invoice'' to ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAssign.dimType
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot assign offset ''q'' to ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAssign.dimType
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot assign offset ''quotation'' to ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAssign.dimType
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot call method deliveryOrder\(\) on null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Cannot call method lines\(\) on null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: mixed$#'
+			identifier: match.unhandled
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:intoThePast\(\) has parameter \$events with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:intoThePast\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:pick\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:planInquiries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:planQuotation\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:planQuotations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:quotationEvents\(\) has parameter \$plan with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:quotationEvents\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Method Database\\Seeders\\DemoSeeder\:\:stages\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Offset ''dp'' does not exist on ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Offset ''inquiry'' does not exist on ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAccess.notFound
+			count: 5
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Offset ''invoice'' does not exist on ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAccess.notFound
+			count: 2
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Offset ''q'' does not exist on ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAccess.notFound
+			count: 10
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Offset ''quotation'' does not exist on ArrayObject\<\*NEVER\*, \*NEVER\*\>\.$#'
+			identifier: offsetAccess.notFound
+			count: 2
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Offset int\|string might not exist on array\<string, App\\Models\\Part\>\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<array\{part_id\: int\<0, max\>, quantity\: mixed, unit_price\: mixed\}\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$inquiry of method App\\Services\\InquiryWorkflow\:\:approve\(\) expects App\\Models\\Inquiry, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$inquiry of method App\\Services\\InquiryWorkflow\:\:assign\(\) expects App\\Models\\Inquiry, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$inquiry of method App\\Services\\InquiryWorkflow\:\:convert\(\) expects App\\Models\\Inquiry, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$inquiry of method App\\Services\\InquiryWorkflow\:\:linkCustomer\(\) expects App\\Models\\Inquiry, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$inquiry of method App\\Services\\InquiryWorkflow\:\:reject\(\) expects App\\Models\\Inquiry, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$invoice of method Database\\Seeders\\DemoSeeder\:\:pay\(\) expects App\\Models\\Invoice, null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:cancel\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:createDeliveryOrder\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:createDownPaymentInvoice\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:createFinalInvoice\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:createSalesOrder\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:recordCustomerPo\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#1 \$quotation of method App\\Services\\QuotationWorkflow\:\:saveLines\(\) expects App\\Models\\Quotation, null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Parameter \#2 \$items of method App\\Services\\InquiryWorkflow\:\:submit\(\) expects list\<array\{part_id\: int\|null, title\: string, part_number\: string\|null, quantity\: int, unit\: string\|null, note\: string\|null\}\>, array\<array\{part_id\: int\<0, max\>\|null, title\: mixed, part_number\: string\|null, quantity\: mixed, unit\: mixed, note\: mixed\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/DemoSeeder.php
+
+		-
+			message: '#^Property App\\Models\\CatalogProduct\:\:\$decided_by \(int\<0, max\>\|null\) does not accept int\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: database/seeders/DemoSeeder.php
