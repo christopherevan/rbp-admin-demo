@@ -94,6 +94,8 @@ if is_healthy; then
 fi
 
 echo "The new release ($NEW_IMAGE) did not become healthy within ${HEALTH_TIMEOUT_SECONDS}s." >&2
+docker compose ps -a >&2 || true
+docker compose logs --no-color --tail=30 app >&2 || true
 if [[ -n "$PREVIOUS_IMAGE" && "$PREVIOUS_IMAGE" != "$NEW_IMAGE" ]]; then
   echo "Rolling back to $PREVIOUS_IMAGE." >&2
   set_env_image "$PREVIOUS_IMAGE"
