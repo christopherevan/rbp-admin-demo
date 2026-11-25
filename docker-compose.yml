@@ -51,6 +51,16 @@ services:
         environment:
             SKIP_TEMPLATE_BUILD: '1'
         command: ['php', 'artisan', 'schedule:work']
+        # Override FrankenPHP's inherited HTTP healthcheck (Caddy is not running here).
+        healthcheck:
+            test:
+                [
+                    'CMD-SHELL',
+                    'tr "\0" " " < /proc/1/cmdline | grep -q "schedule:work"',
+                ]
+            interval: 30s
+            timeout: 5s
+            retries: 3
         volumes:
             - demo-runtime:/app/storage/demo
         depends_on:
