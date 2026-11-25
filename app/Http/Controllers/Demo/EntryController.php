@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Demo;
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\Turnstile;
 use App\Support\Sandbox\SandboxManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,10 @@ use Inertia\Inertia;
 
 class EntryController extends Controller
 {
-    public function __construct(private SandboxManager $sandboxes) {}
+    public function __construct(
+        private SandboxManager $sandboxes,
+        private Turnstile $turnstile,
+    ) {}
 
     /**
      * Enter the demo, as a persona (one click) or with a username and
@@ -29,7 +33,18 @@ class EntryController extends Controller
             'username' => ['required_without:role', 'nullable', 'string', 'max:30'],
             'password' => ['required_with:username', 'nullable', 'string', 'max:100'],
             'website' => ['prohibited'], // honeypot
+            'cf-turnstile-response' => $this->turnstile->enabled()
+                ? ['required', 'string', 'max:2048']
+                : ['nullable', 'string', 'max:2048'],
+        ], [
+            'cf-turnstile-response.required' => 'Please complete the security check before entering.',
         ]);
+
+        if (! $this->turnstile->verify($data['cf-turnstile-response'] ?? null, $request->ip())) {
+            throw ValidationException::withMessages([
+                'cf-turnstile-response' => 'Security check failed or expired. Please try again.',
+            ]);
+        }
 
         $created = $this->ensureSandbox();
 

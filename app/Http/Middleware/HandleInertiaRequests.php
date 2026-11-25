@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Enums\InquiryStatus;
 use App\Models\Inquiry;
 use App\Models\User;
+use App\Services\Turnstile;
 use App\Support\Sandbox\SandboxManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -68,6 +69,7 @@ class HandleInertiaRequests extends Middleware
                 'personas' => config('demo.personas'),
                 'sourceUrl' => config('demo.source_url'),
                 'portfolioUrl' => config('demo.portfolio_url'),
+                'turnstileSiteKey' => app(Turnstile::class)->siteKey(),
             ],
             'badges' => fn () => $user ? [
                 'newInquiries' => Inquiry::where('status', InquiryStatus::New)->count(),

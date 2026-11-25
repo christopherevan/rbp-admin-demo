@@ -67,4 +67,5 @@ export type DemoProps = {
     personas: Record<Role, string>;
     sourceUrl: string | null;
     portfolioUrl: string | null;
+    turnstileSiteKey: string | null;
 };

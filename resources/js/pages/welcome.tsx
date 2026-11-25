@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import InputError from '@/components/input-error';
+import { TurnstileWidget } from '@/components/turnstile-widget';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -72,8 +73,17 @@ const stack = [
 ];
 
 export default function Welcome() {
-    const { auth } = usePage().props;
+    const { auth, demo: demoProps, errors: pageErrors } = usePage().props;
     const [showLogin, setShowLogin] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState('');
+    const [turnstileReset, setTurnstileReset] = useState(0);
+
+    const turnstileSiteKey = demoProps.turnstileSiteKey;
+    const requiresTurnstile = Boolean(turnstileSiteKey);
+    const resetTurnstile = () => {
+        setTurnstileToken('');
+        setTurnstileReset((n) => n + 1);
+    };
 
     return (
         <PublicLayout>
@@ -136,21 +146,49 @@ export default function Welcome() {
                                 name="Anonymous Capybara"
                                 icon={UserCog}
                                 body="Admin: fulfilment, invoicing, payments, inquiry approvals and AI review."
+                                turnstileToken={turnstileToken}
+                                disabled={requiresTurnstile && !turnstileToken}
+                                onError={resetTurnstile}
                             />
                             <Persona
                                 role="sales"
                                 name="Anonymous Narwhal"
                                 icon={Briefcase}
                                 body="Sales: own quotations up to the customer's PO, customers and parts."
+                                turnstileToken={turnstileToken}
+                                disabled={requiresTurnstile && !turnstileToken}
+                                onError={resetTurnstile}
                             />
+
+                            {turnstileSiteKey && (
+                                <div className="space-y-1.5">
+                                    <TurnstileWidget
+                                        siteKey={turnstileSiteKey}
+                                        resetKey={turnstileReset}
+                                        onVerify={setTurnstileToken}
+                                        onExpire={() => setTurnstileToken('')}
+                                    />
+                                    <InputError
+                                        message={
+                                            pageErrors['cf-turnstile-response']
+                                        }
+                                    />
+                                </div>
+                            )}
 
                             {showLogin ? (
                                 <Form
                                     {...demo.enter.form()}
+                                    onError={resetTurnstile}
                                     className="space-y-3 border-t pt-4"
                                 >
                                     {({ processing, errors }) => (
                                         <>
+                                            <input
+                                                type="hidden"
+                                                name="cf-turnstile-response"
+                                                value={turnstileToken}
+                                            />
                                             <input
                                                 type="text"
                                                 name="website"
@@ -190,7 +228,11 @@ export default function Welcome() {
                                                 type="submit"
                                                 variant="secondary"
                                                 className="w-full"
-                                                disabled={processing}
+                                                disabled={
+                                                    processing ||
+                                                    (requiresTurnstile &&
+                                                        !turnstileToken)
+                                                }
                                             >
                                                 {processing && <Spinner />} Sign
                                                 in
@@ -274,17 +316,28 @@ function Persona({
     name,
     body,
     icon: Icon,
+    turnstileToken,
+    disabled,
+    onError,
 }: {
     role: 'admin' | 'sales';
     name: string;
     body: string;
     icon: typeof UserCog;
+    turnstileToken: string;
+    disabled: boolean;
+    onError: () => void;
 }) {
     return (
-        <Form {...demo.enter.form()}>
+        <Form {...demo.enter.form()} onError={onError}>
             {({ processing }) => (
                 <>
                     <input type="hidden" name="role" value={role} />
+                    <input
+                        type="hidden"
+                        name="cf-turnstile-response"
+                        value={turnstileToken}
+                    />
                     <input
                         type="text"
                         name="website"
@@ -294,7 +347,7 @@ function Persona({
                     />
                     <button
                         type="submit"
-                        disabled={processing}
+                        disabled={processing || disabled}
                         className="group flex w-full items-center gap-3 rounded-lg border p-3 text-left transition hover:border-primary hover:bg-primary/5 disabled:opacity-60"
                     >
                         <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">

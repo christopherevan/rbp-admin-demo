@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\Turnstile;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Vite;
@@ -33,9 +34,12 @@ class ContentSecurityPolicy
 
         $response = $next($request);
 
-        $response->headers->set('Content-Security-Policy', implode('; ', [
+        $turnstile = app(Turnstile::class)->enabled();
+        $scriptSrc = "script-src 'self' 'nonce-{$nonce}'".($turnstile ? ' https://challenges.cloudflare.com' : '');
+
+        $directives = [
             "default-src 'self'",
-            "script-src 'self' 'nonce-{$nonce}'",
+            $scriptSrc,
             "style-src 'self' 'unsafe-inline'",
             "img-src 'self' data:",
             "font-src 'self'",
@@ -44,7 +48,13 @@ class ContentSecurityPolicy
             "base-uri 'self'",
             "form-action 'self'",
             "frame-ancestors 'self'",
-        ]));
+        ];
+
+        if ($turnstile) {
+            $directives[] = "frame-src 'self' https://challenges.cloudflare.com";
+        }
+
+        $response->headers->set('Content-Security-Policy', implode('; ', $directives));
 
         return $response;
     }
