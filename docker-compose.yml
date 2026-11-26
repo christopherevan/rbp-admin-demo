@@ -37,7 +37,7 @@ services:
             - demo-runtime:/app/storage/demo
             - caddy-data:/data
             - caddy-config:/config
-        # The sandbox tmpfs (up to 512 MB, see config/demo.php) is charged to
+        # The sandbox tmpfs (up to 128 MB, see config/demo.php) is charged to
         # this container's memory, on top of PHP itself.
         mem_limit: 1g
         cpus: 1.0
@@ -74,6 +74,6 @@ volumes:
         driver_opts:
             type: tmpfs
             device: tmpfs
-            o: 'size=512m,uid=1000,gid=1000,mode=0750'
+            o: 'size=128m,uid=1000,gid=1000,mode=0750'
     caddy-data:
     caddy-config:

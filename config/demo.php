@@ -21,9 +21,9 @@ return [
         'idle_minutes' => 180,
         'max_age_minutes' => 1440,
         // Worst case on disk is max_sandboxes × max_bytes, and it must fit the
-        // sandbox volume (the 512 MB tmpfs in docker-compose.yml, whose pages
+        // sandbox volume (the 128 MB tmpfs in docker-compose.yml, whose pages
         // also count toward the app container's memory limit).
-        'max_sandboxes' => 200,
+        'max_sandboxes' => 50,
         'max_bytes' => 2 * 1024 * 1024,
     ],
 
